@@ -11,8 +11,13 @@ import GameplayKit
 
 class Spike : GameObject
 {
-    override init(_ scene : SKScene)
+    public static let length : CGFloat = 50;
+    
+    private let side : Bool;
+    
+    init(_ scene : SKScene,_ side : Bool)
     {
+        self.side = side;
         super.init(scene);
         
         let path = UIBezierPath()
@@ -37,11 +42,27 @@ class Spike : GameObject
         
         zRotation = 0.5;
         
+        if side
+        {
+            position.x = -300
+        }
+        else
+        {
+            position.x = 300
+        }
+        
+        position.y -= 700;
+        
         //scene.addChild(self);
     }
     
     required init(coder nsCoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func hide()
+    {
+        
     }
 }

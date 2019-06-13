@@ -12,8 +12,15 @@ import GameplayKit
 class GameLogic
 {
     private let scene : SKScene
+    
     private let player : Player;
+    private var leftSpikes = [Spike]();
+    private var rightSpikes = [Spike]();
     private var gameObjects = [GameObject]();
+    
+    private let spikesSlots : Int
+    private let minSpikes : Int = 2;
+    private let maxSpikes : Int;
     
     public init(_ scene : SKScene)
     {
@@ -21,6 +28,11 @@ class GameLogic
         
         player = Player(scene);
         gameObjects.append(player);
+        
+        spikesSlots = Int(scene.size.height / Spike.length)
+        maxSpikes = spikesSlots - 2;
+        
+        generateSpikes();
     }
     
     public func update(_ delta : Float)
@@ -53,6 +65,57 @@ class GameLogic
     
     private func generateSpikes()
     {
+        generateSpikes(true);
+        generateSpikes(false);
+    }
+    
+    private func generateSpikes(_ side : Bool)
+    {
+        var spikesArray = leftSpikes
         
+        if !side
+        {
+            spikesArray = rightSpikes
+        }
+        
+        for spike in spikesArray
+        {
+            spike.hide()
+        }
+        
+        spikesArray.removeAll();
+        
+        var newSpikesCount = randSpikesNumber();
+        var newSlots : [Int] = Array()
+        for i in 0...spikesSlots
+        {
+            newSlots.append(i);
+        }
+        
+        for _ in 0...newSpikesCount
+        {
+            newSlots.remove(at: randomInt(newSlots.count));
+        }
+        
+        for slotIndex in newSlots
+        {
+            var spike = Spike(scene, side);
+            spike.position.y = Spike.length * CGFloat(slotIndex);
+        }
+    }
+    
+    private func randSpikesNumber() -> Int
+    {
+        return randomInt(minSpikes, maxSpikes);
+    }
+    
+    private func randomInt(_ minVal : Int, _ maxVal : Int) -> Int
+    {
+        return Int(arc4random_uniform(UInt32(maxVal - minVal))) + minVal;
+    }
+    
+    private func randomInt(_ maxVal : Int) -> Int
+    {
+        return randomInt(0, maxVal);
     }
 }

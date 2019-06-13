@@ -39,7 +39,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
 //        triangle.lineWidth = 10.0
 //        triangle.strokeColor = UIColor.green
         
-        Spike(self);
+        Spike(self, true);
     }
     
     override func didMove(to view: SKView) {
