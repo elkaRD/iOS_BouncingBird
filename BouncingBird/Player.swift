@@ -9,14 +9,14 @@
 import SpriteKit
 import GameplayKit
 
-class Player : SKNode
+class Player : GameObject
 {
-    private var sprite : SKSpriteNode?;
-    private var levelScene : SKScene?;
+    private var velocity : Float = 150;
+    private var direction : Bool = true;
     
-    init(_ scene : SKScene)
+    override init(_ scene : SKScene)
     {
-        super.init();
+        super.init(scene);
         
         self.levelScene = scene;
         //sprite = SKSpriteNode(imageNamed: "Player.png");
@@ -28,15 +28,43 @@ class Player : SKNode
         //self.physicsBody?.isDynamic = true;
         
         self.sprite = scene.childNode(withName: "//playerSprite") as? SKSpriteNode
+        
+        //let xConstraint = SKConstraint.positionX(SKRange(constantValue: 195));
+        //constraints = [xConstraint];
+        
+        //self.physicsBody.const
     }
     
-    required init(coder nsCoder : NSCoder)
+    required init(coder nsCoder: NSCoder)
     {
-        super.init();
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public override func update(_ delta : Float)
+    {
+        if (direction)
+        {
+            sprite!.position.x += CGFloat(velocity * delta);
+        }
+        else
+        {
+            sprite!.position.x -= CGFloat(velocity * delta);
+        }
+        //print(sprite!.position.x);
     }
     
     public func jump()
     {
-        
+        self.sprite?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 500));
+    }
+    
+    public func onLeftEdge()
+    {
+        direction = true;
+    }
+    
+    public func onRightEdge()
+    {
+        direction = false;
     }
 }

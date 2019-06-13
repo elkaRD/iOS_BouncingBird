@@ -9,22 +9,33 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate
+{
     
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
     private var gameLogic : GameLogic?
     
+    private var lastUpdateTimeInterval: CFTimeInterval?
+    private var minTimeInterval: CFTimeInterval = 0;
+    
+    private var maskPlayer : UInt32 = 2;
+    private var maskRightEdge : UInt32 = 4;
+    private var maskLeftEdge : UInt32 = 8;
+    
     override func sceneDidLoad()
     {
         physicsWorld.gravity = CGVector(dx: 0, dy: -9)
         gameLogic = GameLogic(self);
         
-        
+        let physicsBody = SKPhysicsBody (edgeLoopFrom: self.frame)
+        self.physicsBody = physicsBody
     }
     
     override func didMove(to view: SKView) {
+        
+        self.physicsWorld.contactDelegate = self
         
         // Get label node from scene and store it for use later
         self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
@@ -45,6 +56,11 @@ class GameScene: SKScene {
                                               SKAction.fadeOut(withDuration: 0.5),
                                               SKAction.removeFromParent()]))
         }
+        
+        //self.physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        
+        // set as delegate:
+        
     }
     
     
@@ -78,6 +94,8 @@ class GameScene: SKScene {
         }
         
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+        
+        gameLogic!.jump();
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -93,7 +111,67 @@ class GameScene: SKScene {
     }
     
     
-    override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+    override func update(_ currentTime: TimeInterval)
+    {
+        if (gameLogic == nil)
+        {
+            return;
+        }
+        
+        var delta: CFTimeInterval = currentTime // no reason to make it optional
+        if let luti = lastUpdateTimeInterval {
+            delta = currentTime - luti
+        }
+        
+        lastUpdateTimeInterval = currentTime
+        
+        if delta > 1.0 {
+            delta = minTimeInterval
+            // this line is redundant lastUpdateTimeInterval = currentTime
+        }
+        
+        gameLogic!.update(Float(delta));
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact)
+    {
+        var a = contact.bodyA;
+        
+        if a == nil
+        {
+            return;
+        }
+        
+        if a.node == nil
+        {
+            return ;
+        }
+        
+        if a.node?.name == nil
+        {
+            return ;
+        }
+        
+        print ("didBegin: " + String(a.contactTestBitMask));
+        
+        var bodyA = contact.bodyA;
+        var bodyB = contact.bodyB;
+        
+        if (bodyA.contactTestBitMask & maskPlayer) == 0
+        {
+            swap(&bodyA, &bodyB);
+        }
+        
+        if (bodyA.contactTestBitMask & maskPlayer) != 0
+        {
+            if (bodyB.contactTestBitMask & maskLeftEdge) != 0
+            {
+                gameLogic?.onLeftEdge();
+            }
+            else if (bodyB.contactTestBitMask & maskRightEdge) != 0
+            {
+                gameLogic?.onRightEdge();
+            }
+        }
     }
 }
