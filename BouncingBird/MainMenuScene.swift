@@ -1,5 +1,5 @@
 //
-//  GameScene.swift
+//  MainMenuScene.swift
 //  BouncingBird
 //
 //  Created by Robert Dudziński on 12/06/2019.
@@ -9,19 +9,26 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class MainMenuScene: SKScene {
     
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
-    private var gameLogic : GameLogic?
-    
     override func sceneDidLoad()
     {
-        physicsWorld.gravity = CGVector(dx: 0, dy: -9)
-        gameLogic = GameLogic(self);
+        let myLabel = ButtonNode(fontNamed:"Chalkduster")
+        myLabel.name = "startGameButton";
+        myLabel.text = "Hello, World!";
+        myLabel.fontSize = 20
+        //myLabel.isUserInteractionEnabled = true;
+        CTFontManagerCopyAvailablePostScriptNames()
+        addChild(myLabel)
         
-        
+//        physicsWorld.gravity = CGVector(dx: 0.0, dy: -2.0)
+//        var temp = SKSpriteNode(imageNamed: "Player.png");
+//        temp.physicsBody?.affectedByGravity = true;
+//        temp.physicsBody?.isDynamic = true;
+//        addChild(temp);
     }
     
     override func didMove(to view: SKView) {
@@ -72,12 +79,31 @@ class GameScene: SKScene {
         }
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    {
+        print("touched");
+//        if let label = self.label {
+//            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
+//        }
+//
+//        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
         
-        for t in touches { self.touchDown(atPoint: t.location(in: self)) }
+//        let gameSceneTemp = GameScene(fileNamed: "GameScene");
+//        self.scene?.view?.presentScene(gameSceneTemp!, transition: SKTransition.fade(withDuration: 1.0));
+        
+        for touch in touches
+        {
+            let location = touch.location(in: self)
+            let touchedNode = atPoint(location)
+            if touchedNode.name == "startGameButton"
+            {
+                let gameSceneTemp = GameScene(fileNamed: "GameScene");
+                //let gameSceneTemp = MainMenuScene(fileNamed: "MainMenuScene");
+                //gameSceneTemp?.setScale(1)
+                gameSceneTemp!.scaleMode = .aspectFill
+                self.scene?.view?.presentScene(gameSceneTemp!, transition: SKTransition.fade(withDuration: 1.0));
+            }
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
