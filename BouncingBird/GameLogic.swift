@@ -45,4 +45,14 @@ class GameLogic
     {
         player.onRightEdge();
     }
+    
+    public func onDeath()
+    {
+        player.onDeath();
+    }
+    
+    private func generateSpikes()
+    {
+        
+    }
 }

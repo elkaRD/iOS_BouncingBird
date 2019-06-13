@@ -17,6 +17,8 @@ class GameObject : SKNode, SKPhysicsContactDelegate
     init(_ scene : SKScene)
     {
         super.init();
+        
+        scene.addChild(self)
     }
     
     required init(coder nsCoder : NSCoder)

@@ -14,6 +14,8 @@ class Player : GameObject
     private var velocity : Float = 150;
     private var direction : Bool = true;
     
+    private var isAlive : Bool = true;
+    
     override init(_ scene : SKScene)
     {
         super.init(scene);
@@ -42,6 +44,11 @@ class Player : GameObject
     
     public override func update(_ delta : Float)
     {
+        if !isAlive
+        {
+            return;
+        }
+        
         if (direction)
         {
             sprite!.position.x += CGFloat(velocity * delta);
@@ -55,6 +62,11 @@ class Player : GameObject
     
     public func jump()
     {
+        if !isAlive
+        {
+            return;
+        }
+        
         self.sprite?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 500));
     }
     
@@ -66,5 +78,10 @@ class Player : GameObject
     public func onRightEdge()
     {
         direction = false;
+    }
+    
+    public func onDeath()
+    {
+        isAlive = false;
     }
 }

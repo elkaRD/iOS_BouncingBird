@@ -20,9 +20,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     private var lastUpdateTimeInterval: CFTimeInterval?
     private var minTimeInterval: CFTimeInterval = 0;
     
-    private var maskPlayer : UInt32 = 2;
-    private var maskRightEdge : UInt32 = 4;
-    private var maskLeftEdge : UInt32 = 8;
+    public static let maskPlayer : UInt32 = 2;
+    public static let maskRightEdge : UInt32 = 4;
+    public static let maskLeftEdge : UInt32 = 8;
+    public static let maskSpike : UInt32 = 16;
     
     override func sceneDidLoad()
     {
@@ -31,6 +32,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         
         let physicsBody = SKPhysicsBody (edgeLoopFrom: self.frame)
         self.physicsBody = physicsBody
+        
+//        var triangle = SKShapeNode()
+        
+//        triangle.path = path.cgPath
+//        triangle.lineWidth = 10.0
+//        triangle.strokeColor = UIColor.green
+        
+        Spike(self);
     }
     
     override func didMove(to view: SKView) {
@@ -157,20 +166,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         var bodyA = contact.bodyA;
         var bodyB = contact.bodyB;
         
-        if (bodyA.contactTestBitMask & maskPlayer) == 0
+        if (bodyA.contactTestBitMask & GameScene.maskPlayer) == 0
         {
             swap(&bodyA, &bodyB);
         }
         
-        if (bodyA.contactTestBitMask & maskPlayer) != 0
+        if (bodyA.contactTestBitMask & GameScene.maskPlayer) != 0
         {
-            if (bodyB.contactTestBitMask & maskLeftEdge) != 0
+            if (bodyB.contactTestBitMask & GameScene.maskLeftEdge) != 0
             {
                 gameLogic?.onLeftEdge();
             }
-            else if (bodyB.contactTestBitMask & maskRightEdge) != 0
+            else if (bodyB.contactTestBitMask & GameScene.maskRightEdge) != 0
             {
                 gameLogic?.onRightEdge();
+            }
+            else if (bodyB.contactTestBitMask & GameScene.maskSpike) != 0
+            {
+                gameLogic?.onDeath();
             }
         }
     }
