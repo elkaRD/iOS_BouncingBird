@@ -11,7 +11,7 @@ import GameplayKit
 
 class GameLogic
 {
-    private let scene : SKScene
+    private let scene : GameScene
     
     private let player : Player;
     private var leftSpikes = [Spike]();
@@ -22,7 +22,9 @@ class GameLogic
     private let minSpikes : Int = 2;
     private let maxSpikes : Int;
     
-    public init(_ scene : SKScene)
+    private var curScore : Int = 0;
+    
+    public init(_ scene : GameScene)
     {
         self.scene = scene;
         
@@ -51,16 +53,27 @@ class GameLogic
     public func onLeftEdge()
     {
         player.onLeftEdge();
+        onBounce();
     }
     
     public func onRightEdge()
     {
         player.onRightEdge();
+        onBounce();
     }
     
     public func onDeath()
     {
         player.onDeath();
+    }
+    
+    private func onBounce()
+    {
+        if !player.getIsAlive()
+        {
+            return;
+        }
+        curScore = curScore + 1;
     }
     
     private func generateSpikes()
@@ -100,7 +113,7 @@ class GameLogic
         for slotIndex in newSlots
         {
             var spike = Spike(scene, side);
-            spike.position.y = Spike.length * CGFloat(slotIndex);
+            spike.position.y = Spike.length * CGFloat(slotIndex) - scene.frame.size.height / 2;
         }
     }
     

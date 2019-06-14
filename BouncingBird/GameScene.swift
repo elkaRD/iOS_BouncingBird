@@ -39,6 +39,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate
 //        triangle.lineWidth = 10.0
 //        triangle.strokeColor = UIColor.green
         
+        print(frame.size.width)
+        print(frame.size.height)
+        
+        
+        
         Spike(self, true);
     }
     

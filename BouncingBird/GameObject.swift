@@ -9,7 +9,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameObject : SKNode, SKPhysicsContactDelegate
+class GameObject : SKTransformNode
 {
     internal var sprite : SKSpriteNode?;
     internal var levelScene : SKScene?;

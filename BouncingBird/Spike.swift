@@ -11,7 +11,7 @@ import GameplayKit
 
 class Spike : GameObject
 {
-    public static let length : CGFloat = 50;
+    public static let length : CGFloat = 200;
     
     private let side : Bool;
     
@@ -40,18 +40,18 @@ class Spike : GameObject
         physicsBody?.affectedByGravity = false;
         physicsBody?.contactTestBitMask = GameScene.maskSpike;
         
-        zRotation = 0.5;
+        
         
         if side
         {
-            position.x = -300
+            position.x = -scene.frame.size.width / 2 + 50;
+            zRotation = -0.5;
         }
         else
         {
-            position.x = 300
+            position.x = scene.frame.size.width / 2 - 50;
+            zRotation = 0.5;
         }
-        
-        position.y -= 700;
         
         //scene.addChild(self);
     }

@@ -30,6 +30,9 @@ class Player : GameObject
         //self.physicsBody?.isDynamic = true;
         
         self.sprite = scene.childNode(withName: "//playerSprite") as? SKSpriteNode
+        //addChild(self.sprite!.copy() as! SKNode)
+        self.sprite?.move(toParent: self);
+        //self.sprite = SKSpriteNode(fileNamed: "Player.png")
         
         //let xConstraint = SKConstraint.positionX(SKRange(constantValue: 195));
         //constraints = [xConstraint];
@@ -51,11 +54,13 @@ class Player : GameObject
         
         if (direction)
         {
-            sprite!.position.x += CGFloat(velocity * delta);
+            //sprite!.position.x += CGFloat(velocity * delta);
+            position.x += CGFloat(velocity * delta);
         }
         else
         {
-            sprite!.position.x -= CGFloat(velocity * delta);
+            //sprite!.position.x -= CGFloat(velocity * delta);
+            position.x -= CGFloat(velocity * delta);
         }
         //print(sprite!.position.x);
     }
@@ -73,15 +78,30 @@ class Player : GameObject
     public func onLeftEdge()
     {
         direction = true;
+//        let rotateAction = SKAction.rotate(toAngle: .pi / 4, duration: 0.5)
+//        sprite!.run(rotateAction)
+        yRotation = 0
     }
     
     public func onRightEdge()
     {
         direction = false;
+//        let rotateAction = SKAction.rotate(toAngle: 0, duration: 0.5)
+//        sprite!.run(rotateAction)
+        yRotation = .pi
     }
     
     public func onDeath()
     {
         isAlive = false;
+        //sprite?.physicsBody?.affectedByGravity = false;
+        sprite?.physicsBody?.restitution = 0.8;
+        sprite?.physicsBody?.linearDamping = 0.1;
+        sprite?.physicsBody?.angularDamping = 0.1;
+    }
+    
+    public func getIsAlive() -> Bool
+    {
+        return isAlive;
     }
 }
