@@ -23,6 +23,7 @@ class GameLogic
     private let maxSpikes : Int;
     
     private var curScore : Int = 0;
+    private var bestScore : Int = 0;
     
     public init(_ scene : GameScene)
     {
@@ -34,10 +35,13 @@ class GameLogic
         spikesSlots = Int(scene.size.height / Spike.length)
         maxSpikes = spikesSlots - 2;
         
+        bestScore = loadBestScore();
+        scene.setScore(curScore);
+        
         generateSpikes();
     }
     
-    public func update(_ delta : Float)
+    public func update(_ delta : CGFloat)
     {
         for go in gameObjects
         {
@@ -64,7 +68,15 @@ class GameLogic
     
     public func onDeath()
     {
+        let newBest = curScore > bestScore
+        
         player.onDeath();
+        scene.onGameOver(bestScore, newBest);
+        
+        if newBest
+        {
+            saveBestScore();
+        }
     }
     
     private func onBounce()
@@ -74,6 +86,8 @@ class GameLogic
             return;
         }
         curScore = curScore + 1;
+        
+        scene.setScore(curScore);
     }
     
     private func generateSpikes()
@@ -130,5 +144,15 @@ class GameLogic
     private func randomInt(_ maxVal : Int) -> Int
     {
         return randomInt(0, maxVal);
+    }
+    
+    private func loadBestScore() -> Int
+    {
+        return 0;
+    }
+    
+    private func saveBestScore()
+    {
+        
     }
 }

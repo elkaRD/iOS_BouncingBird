@@ -11,10 +11,14 @@ import GameplayKit
 
 class Player : GameObject
 {
-    private var velocity : Float = 150;
+    private var velocity : CGFloat = 150;
     private var direction : Bool = true;
     
     private var isAlive : Bool = true;
+    
+    private var rotYChanging : Bool = false;
+    private let rotYDuration : CGFloat = 0.4;
+    private var rotYTime : CGFloat = 0;
     
     override init(_ scene : SKScene)
     {
@@ -45,8 +49,31 @@ class Player : GameObject
         fatalError("init(coder:) has not been implemented")
     }
     
-    public override func update(_ delta : Float)
+    public override func update(_ delta : CGFloat)
     {
+        if rotYChanging
+        {
+            rotYTime = rotYTime + delta;
+            
+            var s = rotYTime / rotYDuration;
+            if (s > 1)
+            {
+                s = 1;
+                rotYChanging = false;
+            }
+            
+            if direction
+            {
+                yRotation = lerpSin(0, .pi, s);
+            }
+            else
+            {
+                yRotation = lerpSin(.pi, 2 * .pi, s);
+            }
+            
+            print(lerp(0, .pi, s));
+        }
+        
         if !isAlive
         {
             return;
@@ -63,6 +90,8 @@ class Player : GameObject
             position.x -= CGFloat(velocity * delta);
         }
         //print(sprite!.position.x);
+        
+        
     }
     
     public func jump()
@@ -80,7 +109,8 @@ class Player : GameObject
         direction = true;
 //        let rotateAction = SKAction.rotate(toAngle: .pi / 4, duration: 0.5)
 //        sprite!.run(rotateAction)
-        yRotation = 0
+        //yRotation = 0
+        rotateAfterBounce();
     }
     
     public func onRightEdge()
@@ -88,7 +118,8 @@ class Player : GameObject
         direction = false;
 //        let rotateAction = SKAction.rotate(toAngle: 0, duration: 0.5)
 //        sprite!.run(rotateAction)
-        yRotation = .pi
+        //yRotation = .pi
+        rotateAfterBounce();
     }
     
     public func onDeath()
@@ -103,5 +134,11 @@ class Player : GameObject
     public func getIsAlive() -> Bool
     {
         return isAlive;
+    }
+    
+    private func rotateAfterBounce()
+    {
+        rotYChanging = true;
+        rotYTime = 0;
     }
 }

@@ -18,8 +18,8 @@ class MainMenuScene: SKScene {
     {
         let myLabel = ButtonNode(fontNamed:"Chalkduster")
         myLabel.name = "startGameButton";
-        myLabel.text = "Hello, World!";
-        myLabel.fontSize = 20
+        myLabel.text = "PLAY";
+        myLabel.fontSize = 144
         //myLabel.isUserInteractionEnabled = true;
         CTFontManagerCopyAvailablePostScriptNames()
         addChild(myLabel)

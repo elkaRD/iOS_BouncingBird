@@ -12,7 +12,9 @@ import GameplayKit
 class GameScene: SKScene, SKPhysicsContactDelegate
 {
     
-    private var label : SKLabelNode?
+    private var scoreLabel : SKLabelNode?
+    private var gameOverLabel : SKLabelNode?
+    private var bestScoreLabel : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
     private var gameLogic : GameLogic?
@@ -52,11 +54,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         self.physicsWorld.contactDelegate = self
         
         // Get label node from scene and store it for use later
-        self.label = self.childNode(withName: "//helloLabel") as? SKLabelNode
-        if let label = self.label {
+        self.scoreLabel = self.childNode(withName: "//helloLabel") as? SKLabelNode
+        if let label = self.scoreLabel {
             label.alpha = 0.0
             label.run(SKAction.fadeIn(withDuration: 2.0))
         }
+        
+        self.gameOverLabel = self.childNode(withName: "//gameOverLabel") as? SKLabelNode
+        self.bestScoreLabel = self.childNode(withName: "//bestScoreLabel") as? SKLabelNode
         
         // Create shape node to use during mouse interaction
         let w = (self.size.width + self.size.height) * 0.05
@@ -103,9 +108,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let label = self.label {
-            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
-        }
+//        if let label = self.scoreLabel {
+//            label.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
+//        }
         
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
         
@@ -144,29 +149,29 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             // this line is redundant lastUpdateTimeInterval = currentTime
         }
         
-        gameLogic!.update(Float(delta));
+        gameLogic!.update(CGFloat(delta));
     }
     
     func didBegin(_ contact: SKPhysicsContact)
     {
-        var a = contact.bodyA;
-        
-        if a == nil
-        {
-            return;
-        }
-        
-        if a.node == nil
-        {
-            return ;
-        }
-        
-        if a.node?.name == nil
-        {
-            return ;
-        }
-        
-        print ("didBegin: " + String(a.contactTestBitMask));
+//        var a = contact.bodyA;
+//
+//        if a == nil
+//        {
+//            return;
+//        }
+//
+//        if a.node == nil
+//        {
+//            return ;
+//        }
+//
+//        if a.node?.name == nil
+//        {
+//            return ;
+//        }
+//
+//        print ("didBegin: " + String(a.contactTestBitMask));
         
         var bodyA = contact.bodyA;
         var bodyB = contact.bodyB;
@@ -191,5 +196,35 @@ class GameScene: SKScene, SKPhysicsContactDelegate
                 gameLogic?.onDeath();
             }
         }
+    }
+    
+    public func setScore(_ newScore : Int)
+    {
+        scoreLabel?.text = String(newScore);
+        //scoreLabel?.run(SKAction.init(named: "Pulse")!, withKey: "fadeInOut")
+        //scoreLabel?.run(SKAction.scale()
+        
+        let bigger = SKAction.scale(to: 2, duration: 0.1);
+        let smaller = SKAction.scale(to: 1.0, duration: 0.2);
+        let sequence = SKAction.sequence([bigger, smaller]);
+        scoreLabel?.run(sequence);
+    }
+    
+    public func onGameOver(_ bestScore : Int, _ isNewBest : Bool)
+    {
+        gameOverLabel?.run(SKAction.fadeAlpha(to: 1.0, duration: 0.5))
+        if isNewBest
+        {
+            bestScoreLabel?.text = "NEW HI-SCORE!";
+        }
+        else
+        {
+            bestScoreLabel?.text = "BEST: " + String(bestScore);
+        }
+        
+        let delay = SKAction.wait(forDuration: 0.5);
+        let show = SKAction.fadeAlpha(to: 1.0, duration: 0.5)
+        
+        bestScoreLabel?.run(SKAction.sequence([delay, show]));
     }
 }

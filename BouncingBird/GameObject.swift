@@ -26,8 +26,19 @@ class GameObject : SKTransformNode
         super.init();
     }
     
-    public func update(_ delta : Float)
+    public func update(_ delta : CGFloat)
     {
         
+    }
+    
+    internal final func lerp(_ beg : CGFloat, _ end : CGFloat, _ s: CGFloat) -> CGFloat
+    {
+        return (end - beg) * s + beg;
+    }
+    
+    internal final func lerpSin(_ beg : CGFloat, _ end : CGFloat, _ s : CGFloat) -> CGFloat
+    {
+        var t = (sin(s * .pi + .pi / 2) + 1) / 2;
+        return (end - beg) * t + beg;
     }
 }
