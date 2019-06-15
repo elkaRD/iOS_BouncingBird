@@ -14,15 +14,20 @@ class MainMenuScene: SKScene {
     private var label : SKLabelNode?
     private var spinnyNode : SKShapeNode?
     
+    private var bestScoreLabel : SKLabelNode?
+    
     override func sceneDidLoad()
     {
-        let myLabel = ButtonNode(fontNamed:"Chalkduster")
-        myLabel.name = "startGameButton";
-        myLabel.text = "PLAY";
-        myLabel.fontSize = 144
+        let startGameLabel = ButtonNode(fontNamed:"Chalkduster")
+        startGameLabel.name = "startGameButton";
+        startGameLabel.text = "PLAY";
+        startGameLabel.fontSize = 144
         //myLabel.isUserInteractionEnabled = true;
         CTFontManagerCopyAvailablePostScriptNames()
-        addChild(myLabel)
+        addChild(startGameLabel)
+        
+        self.bestScoreLabel = self.childNode(withName: "//bestScoreLabel") as? SKLabelNode
+        bestScoreLabel?.text = "Best: " + String(GameLogic.loadBestScore());
         
 //        physicsWorld.gravity = CGVector(dx: 0.0, dy: -2.0)
 //        var temp = SKSpriteNode(imageNamed: "Player.png");

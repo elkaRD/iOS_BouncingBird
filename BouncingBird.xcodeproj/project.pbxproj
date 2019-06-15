@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E107A68F22B43D060062D7C0 /* ParticlesDrops.sks in Resources */ = {isa = PBXBuildFile; fileRef = E107A68E22B43D060062D7C0 /* ParticlesDrops.sks */; };
 		E152B43122B2D6120033EEF6 /* Spike.swift in Sources */ = {isa = PBXBuildFile; fileRef = E152B43022B2D6120033EEF6 /* Spike.swift */; };
 		E1D1CDA622B26CBF00830CB0 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D1CDA522B26CBF00830CB0 /* GameObject.swift */; };
 		E1FF320A22B199D600D17F3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FF320922B199D600D17F3D /* AppDelegate.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E107A68E22B43D060062D7C0 /* ParticlesDrops.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ParticlesDrops.sks; sourceTree = "<group>"; };
 		E152B43022B2D6120033EEF6 /* Spike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spike.swift; sourceTree = "<group>"; };
 		E1D1CDA522B26CBF00830CB0 /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
 		E1FF320622B199D600D17F3D /* BouncingBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BouncingBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +92,7 @@
 				E1FF322522B1A56800D17F3D /* ButtonNode.swift */,
 				E1D1CDA522B26CBF00830CB0 /* GameObject.swift */,
 				E152B43022B2D6120033EEF6 /* Spike.swift */,
+				E107A68E22B43D060062D7C0 /* ParticlesDrops.sks */,
 			);
 			path = BouncingBird;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				E1FF321522B199D600D17F3D /* Main.storyboard in Resources */,
 				E1FF322222B19B3100D17F3D /* MainMenuScene.sks in Resources */,
 				E1FF320C22B199D600D17F3D /* GameScene.sks in Resources */,
+				E107A68F22B43D060062D7C0 /* ParticlesDrops.sks in Resources */,
 				E1FF321722B199D700D17F3D /* Assets.xcassets in Resources */,
 				E1FF321A22B199D700D17F3D /* LaunchScreen.storyboard in Resources */,
 				E1FF320E22B199D600D17F3D /* Actions.sks in Resources */,

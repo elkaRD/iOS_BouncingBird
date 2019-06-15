@@ -35,7 +35,7 @@ class GameLogic
         spikesSlots = Int(scene.size.height / Spike.length)
         maxSpikes = spikesSlots - 2;
         
-        bestScore = loadBestScore();
+        bestScore = GameLogic.loadBestScore();
         scene.setScore(curScore);
         
         generateSpikes();
@@ -58,16 +58,23 @@ class GameLogic
     {
         player.onLeftEdge();
         onBounce();
+        generateSpikes(true, &leftSpikes);
     }
     
     public func onRightEdge()
     {
         player.onRightEdge();
         onBounce();
+        generateSpikes(false, &rightSpikes);
     }
     
     public func onDeath()
     {
+        if !player.getIsAlive()
+        {
+            return;
+        }
+        
         let newBest = curScore > bestScore
         
         player.onDeath();
@@ -92,18 +99,19 @@ class GameLogic
     
     private func generateSpikes()
     {
-        generateSpikes(true);
-        generateSpikes(false);
+        generateSpikes(true, &leftSpikes);
+        generateSpikes(false, &rightSpikes);
     }
     
-    private func generateSpikes(_ side : Bool)
+    //private func generateSpikes(_ side : Bool)
+    private func generateSpikes(_ side : Bool, _ spikesArray : inout [Spike])
     {
-        var spikesArray = leftSpikes
+        //var spikesArray = leftSpikes
         
-        if !side
-        {
-            spikesArray = rightSpikes
-        }
+//        if !side
+//        {
+//            spikesArray = rightSpikes
+//        }
         
         for spike in spikesArray
         {
@@ -128,6 +136,7 @@ class GameLogic
         {
             var spike = Spike(scene, side);
             spike.position.y = Spike.length * CGFloat(slotIndex) - scene.frame.size.height / 2;
+            spikesArray.append(spike);
         }
     }
     
@@ -146,13 +155,19 @@ class GameLogic
         return randomInt(0, maxVal);
     }
     
-    private func loadBestScore() -> Int
+    public static func loadBestScore() -> Int
     {
+        if let score = UserDefaults.standard.object(forKey: "HighestScore")
+        {
+            return score as! Int;
+        }
+        
         return 0;
     }
     
     private func saveBestScore()
     {
-        
+        UserDefaults.standard.set(bestScore, forKey:"HighestScore")
+        UserDefaults.standard.synchronize()
     }
 }

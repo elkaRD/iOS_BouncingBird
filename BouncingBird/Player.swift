@@ -102,6 +102,17 @@ class Player : GameObject
         }
         
         self.sprite?.physicsBody?.applyImpulse(CGVector(dx: 0, dy: 500));
+        
+        let particles = SKEmitterNode(fileNamed: "ParticlesDrops.sks")
+        particles?.position.y = sprite!.position.y;
+        particles?.position.x = position.x;
+        scene!.addChild(particles!)
+        
+        particles?.run(
+            SKAction.sequence([
+                SKAction.wait(forDuration: 1.0),
+                SKAction.removeFromParent()
+                ]))
     }
     
     public func onLeftEdge()
@@ -138,6 +149,11 @@ class Player : GameObject
     
     private func rotateAfterBounce()
     {
+        if !isAlive
+        {
+            return;
+        }
+        
         rotYChanging = true;
         rotYTime = 0;
     }
