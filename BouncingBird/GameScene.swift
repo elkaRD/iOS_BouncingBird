@@ -46,6 +46,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         
         
         //Spike(self, true);
+        Coin(self);
     }
     
     override func didMove(to view: SKView) {

@@ -92,10 +92,10 @@ class Player : GameObject
         }
         //print(sprite!.position.x);
         
-        if !reachedHalfScreen && ((direction && position.x > 0) || (!direction && position.x < 0))
-        {
-            //gameLogic.reachedHalfOfScreen();
-        }
+//        if !reachedHalfScreen && ((direction && position.x > 0) || (!direction && position.x < 0))
+//        {
+//            //gameLogic.reachedHalfOfScreen();
+//        }
 
         
     }
