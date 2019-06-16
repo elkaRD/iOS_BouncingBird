@@ -106,14 +106,11 @@ class GameLogic
         
         if newBest
         {
+            bestScore = curScore;
             saveBestScore();
         }
         
-        if coin != nil
-        {
-            coin?.onCollected();
-        }
-        
+        coin?.onCollected();
         enableSpikes(&leftSpikes);
         enableSpikes(&rightSpikes);
     }
@@ -164,7 +161,18 @@ class GameLogic
         }
         
         spikesArray.removeAll();
+        let newSlots : [Int] = generateSpikesSlots();
         
+        for slotIndex in newSlots
+        {
+            let spike = Spike(scene, side, colorManager);
+            spike.position.y = Spike.length * CGFloat(slotIndex + 1) - scene.frame.size.height / 2;
+            spikesArray.append(spike);
+        }
+    }
+    
+    private func generateSpikesSlots() -> [Int]
+    {
         let newSpikesCount = spikesSlots - randSpikesNumber();
         var newSlots : [Int] = Array()
         for i in 0...spikesSlots
@@ -177,22 +185,12 @@ class GameLogic
             newSlots.remove(at: Int.random(newSlots.count));
         }
         
-        for slotIndex in newSlots
-        {
-            let spike = Spike(scene, side, colorManager);
-            spike.position.y = Spike.length * CGFloat(slotIndex + 1) - scene.frame.size.height / 2;
-            spikesArray.append(spike);
-        }
+        return newSlots;
     }
     
     private func randSpikesNumber() -> Int
     {
         return Int.random(minSpikes, maxSpikes);
-    }
-    
-    public func reachedHalfOfScreen()
-    {
-        
     }
     
     public static func loadBestScore() -> Int
