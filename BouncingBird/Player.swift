@@ -15,6 +15,7 @@ class Player : GameObject
     private var direction : Bool = true;
     
     private var isAlive : Bool = true;
+    private var reachedHalfScreen : Bool = false;
     
     private var rotYChanging : Bool = false;
     private let rotYDuration : CGFloat = 0.4;
@@ -91,6 +92,11 @@ class Player : GameObject
         }
         //print(sprite!.position.x);
         
+        if !reachedHalfScreen && ((direction && position.x > 0) || (!direction && position.x < 0))
+        {
+            //gameLogic.reachedHalfOfScreen();
+        }
+
         
     }
     

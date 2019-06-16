@@ -45,8 +45,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         print(frame.size.height)
         
         
-        
-        Spike(self, true);
+        //Spike(self, true);
     }
     
     override func didMove(to view: SKView) {
@@ -115,6 +114,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         for t in touches { self.touchDown(atPoint: t.location(in: self)) }
         
         gameLogic!.jump();
+        
+        for touch in touches
+        {
+            let location = touch.location(in: self)
+            let touchedNode = atPoint(location)
+            if touchedNode.name == "playAgainButton"
+            {
+                let gameSceneTemp = GameScene(fileNamed: "GameScene");
+                gameSceneTemp!.scaleMode = .aspectFill
+                self.scene?.view?.presentScene(gameSceneTemp!, transition: SKTransition.fade(withDuration: 1.0));
+            }
+            else if touchedNode.name == "returnButton"
+            {
+                let gameSceneTemp = MainMenuScene(fileNamed: "MainMenuScene");
+                gameSceneTemp!.scaleMode = .aspectFill
+                self.scene?.view?.presentScene(gameSceneTemp!, transition: SKTransition.fade(withDuration: 1.0));
+            }
+        }
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -226,5 +243,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         let show = SKAction.fadeAlpha(to: 1.0, duration: 0.5)
         
         bestScoreLabel?.run(SKAction.sequence([delay, show]));
+        
+        let playAgainLabel = ButtonNode(fontNamed:"Chalkduster")
+        playAgainLabel.position.y = -340;
+        playAgainLabel.zPosition = 100;
+        playAgainLabel.name = "playAgainButton";
+        playAgainLabel.text = "AGAIN";
+        playAgainLabel.fontSize = 120
+        //myLabel.isUserInteractionEnabled = true;
+        CTFontManagerCopyAvailablePostScriptNames()
+        addChild(playAgainLabel)
+        
+        let returnLabel = ButtonNode(fontNamed:"Chalkduster")
+        returnLabel.position.y = -490
+        returnLabel.zPosition = 100;
+        returnLabel.name = "returnButton";
+        returnLabel.text = "MENU";
+        returnLabel.fontSize = 96
+        //myLabel.isUserInteractionEnabled = true;
+        CTFontManagerCopyAvailablePostScriptNames()
+        addChild(returnLabel)
+        
     }
 }

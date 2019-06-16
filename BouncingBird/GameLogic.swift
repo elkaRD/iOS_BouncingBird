@@ -59,6 +59,7 @@ class GameLogic
         player.onLeftEdge();
         onBounce();
         generateSpikes(true, &leftSpikes);
+        enableSpikes(&rightSpikes);
     }
     
     public func onRightEdge()
@@ -66,6 +67,7 @@ class GameLogic
         player.onRightEdge();
         onBounce();
         generateSpikes(false, &rightSpikes);
+        enableSpikes(&leftSpikes);
     }
     
     public func onDeath()
@@ -95,6 +97,14 @@ class GameLogic
         curScore = curScore + 1;
         
         scene.setScore(curScore);
+    }
+    
+    private func enableSpikes(_ spikesArray : inout [Spike])
+    {
+        for spike in spikesArray
+        {
+            spike.enablePhycisc();
+        }
     }
     
     private func generateSpikes()
@@ -143,6 +153,11 @@ class GameLogic
     private func randSpikesNumber() -> Int
     {
         return randomInt(minSpikes, maxSpikes);
+    }
+    
+    public func reachedHalfOfScreen()
+    {
+        
     }
     
     private func randomInt(_ minVal : Int, _ maxVal : Int) -> Int

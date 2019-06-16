@@ -40,6 +40,7 @@ class Spike : GameObject
         
 //        physicsBody = SKPhysicsBody(polygonFrom: path.cgPath)
 //        physicsBody?.affectedByGravity = false;
+//        //physicsBody?.isDynamic = false;        
 //        physicsBody?.contactTestBitMask = GameScene.maskSpike;
         
         if side
@@ -103,6 +104,7 @@ class Spike : GameObject
         
         physicsBody = SKPhysicsBody(polygonFrom: path.cgPath)
         physicsBody?.affectedByGravity = false;
+        //physicsBody?.isDynamic = false;
         physicsBody?.contactTestBitMask = GameScene.maskSpike;
     }
 }
