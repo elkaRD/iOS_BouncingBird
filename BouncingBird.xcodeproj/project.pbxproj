@@ -12,6 +12,7 @@
 		E107A69322B663BB0062D7C0 /* Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = E107A69222B663BB0062D7C0 /* Random.swift */; };
 		E107A69522B665FA0062D7C0 /* Lerp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E107A69422B665FA0062D7C0 /* Lerp.swift */; };
 		E107A69722B667DA0062D7C0 /* ParticlesCollected.sks in Resources */ = {isa = PBXBuildFile; fileRef = E107A69622B667DA0062D7C0 /* ParticlesCollected.sks */; };
+		E107A69922B69C620062D7C0 /* LevelColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E107A69822B69C620062D7C0 /* LevelColorManager.swift */; };
 		E152B43122B2D6120033EEF6 /* Spike.swift in Sources */ = {isa = PBXBuildFile; fileRef = E152B43022B2D6120033EEF6 /* Spike.swift */; };
 		E1D1CDA622B26CBF00830CB0 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D1CDA522B26CBF00830CB0 /* GameObject.swift */; };
 		E1FF320A22B199D600D17F3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FF320922B199D600D17F3D /* AppDelegate.swift */; };
@@ -35,6 +36,7 @@
 		E107A69222B663BB0062D7C0 /* Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Random.swift; sourceTree = "<group>"; };
 		E107A69422B665FA0062D7C0 /* Lerp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lerp.swift; sourceTree = "<group>"; };
 		E107A69622B667DA0062D7C0 /* ParticlesCollected.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ParticlesCollected.sks; sourceTree = "<group>"; };
+		E107A69822B69C620062D7C0 /* LevelColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelColorManager.swift; sourceTree = "<group>"; };
 		E152B43022B2D6120033EEF6 /* Spike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spike.swift; sourceTree = "<group>"; };
 		E1D1CDA522B26CBF00830CB0 /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
 		E1FF320622B199D600D17F3D /* BouncingBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BouncingBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +107,7 @@
 				E107A69222B663BB0062D7C0 /* Random.swift */,
 				E107A69422B665FA0062D7C0 /* Lerp.swift */,
 				E107A69622B667DA0062D7C0 /* ParticlesCollected.sks */,
+				E107A69822B69C620062D7C0 /* LevelColorManager.swift */,
 			);
 			path = BouncingBird;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				E107A69122B5DD5E0062D7C0 /* Coin.swift in Sources */,
 				E1FF322A22B22B2000D17F3D /* GameLogic.swift in Sources */,
 				E107A69322B663BB0062D7C0 /* Random.swift in Sources */,
+				E107A69922B69C620062D7C0 /* LevelColorManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

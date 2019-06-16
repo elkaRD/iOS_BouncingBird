@@ -196,10 +196,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         var bodyA = contact.bodyA;
         var bodyB = contact.bodyB;
         
-        if (bodyA.contactTestBitMask & GameScene.maskPlayer) == 0
-        {
-            swap(&bodyA, &bodyB);
-        }
+//        if (bodyA.contactTestBitMask & GameScene.maskPlayer) == 0
+//        {
+//            swap(&bodyA, &bodyB);
+//        }
         
         if (bodyA.contactTestBitMask & GameScene.maskPlayer) != 0
         {
@@ -211,11 +211,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate
 //            {
 //                gameLogic?.onRightEdge();
 //            }
-            if (bodyB.contactTestBitMask & GameScene.maskSpike) != 0
+            if (bodyB.categoryBitMask & GameScene.maskSpike) != 0
             {
                 gameLogic?.onDeath();
             }
-            else if (bodyB.contactTestBitMask & GameScene.maskCoin) != 0
+            else if (bodyB.categoryBitMask & GameScene.maskCoin) != 0
             {
                 gameLogic?.collectedCoin();
             }

@@ -28,6 +28,10 @@ class Coin : GameObject
             self.yRotation = CGFloat.lerpSin(0, 2 * .pi, s);
         }
         
+        let tempScale = xScale;
+        setScale(0);
+        run(SKAction.scale(to: tempScale, duration: 0.4));
+        
         run(SKAction.repeatForever( SKAction.sequence([SKAction.wait(forDuration: 3.0), rotationAction])));
     }
     
@@ -41,5 +45,8 @@ class Coin : GameObject
         let particles = SKEmitterNode(fileNamed: "ParticlesCollected.sks")
         particles?.position = sprite!.position;
         scene!.addChild(particles!)
+        
+        //run(SKAction.move(to: endPos, duration: 0.5))
+        run(SKAction.sequence([SKAction.scale(to: 0, duration: 0.4), SKAction.removeFromParent()]))
     }
 }

@@ -28,6 +28,8 @@ class GameLogic
     
     private var direction : Bool = true;
     
+    private let colorManager : LevelColorManager;
+    
     public init(_ scene : GameScene)
     {
         self.scene = scene;
@@ -41,6 +43,8 @@ class GameLogic
         bestScore = GameLogic.loadBestScore();
         scene.setScore(curScore);
         
+        colorManager = LevelColorManager(scene);
+        
         generateSpikes();
     }
     
@@ -51,11 +55,11 @@ class GameLogic
             go.update(delta);
         }
         
-        if player.position.x > 320 && direction
+        if player.position.x > 290 && direction
         {
             onRightEdge();
         }
-        if player.position.x < -320 && !direction
+        if player.position.x < -290 && !direction
         {
             onLeftEdge();
         }
@@ -100,11 +104,16 @@ class GameLogic
         {
             saveBestScore();
         }
+        
+        enableSpikes(&leftSpikes);
+        enableSpikes(&rightSpikes);
     }
     
     public func collectedCoin()
     {        
         coin?.onCollected();
+        coin = nil;
+        incrementScore();
     }
     
     private func onBounce()
@@ -113,14 +122,21 @@ class GameLogic
         {
             return;
         }
-        curScore = curScore + 1;
         
-        scene.setScore(curScore);
+        incrementScore();
         
         if coin == nil
         {
             coin = Coin(scene);
         }
+        
+        colorManager.changeColor(&leftSpikes, &rightSpikes);
+    }
+    
+    private func incrementScore()
+    {
+        curScore = curScore + 1;
+        scene.setScore(curScore);
     }
     
     private func enableSpikes(_ spikesArray : inout [Spike])
