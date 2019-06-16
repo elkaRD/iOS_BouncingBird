@@ -23,10 +23,15 @@ class Spike : GameObject
         super.init(scene);
         
         let path = UIBezierPath()
+//        path.move(to: CGPoint(x: 0.0, y: 50.0))
+//        path.addLine(to: CGPoint(x: 50.0, y: -36.6))
+//        path.addLine(to: CGPoint(x: -50.0, y: -36.6))
+//        path.addLine(to: CGPoint(x: 0.0, y: 50.0))
         path.move(to: CGPoint(x: 0.0, y: 50.0))
-        path.addLine(to: CGPoint(x: 50.0, y: -36.6))
-        path.addLine(to: CGPoint(x: -50.0, y: -36.6))
-        path.addLine(to: CGPoint(x: 0.0, y: 50.0))
+        path.addLine(to: CGPoint(x: 60.0, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: -50.0))
+        path.addLine(to: CGPoint(x: -60, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: 50))
         
 //        let path = CGMutablePath()
 //        path.move(to: CGPoint(x: 0, y: 0))
@@ -45,13 +50,13 @@ class Spike : GameObject
         
         if side
         {
-            position.x = -scene.frame.size.width / 2;
-            zRotation = -0.5;
+            triangle.position.x = -scene.frame.size.width / 2 + 15;
+            //zRotation = -0.5;
         }
         else
         {
-            position.x = scene.frame.size.width / 2;
-            zRotation = 0.5;
+            triangle.position.x = scene.frame.size.width / 2 - 15;
+            //zRotation = 0.5;
         }
         
         var startPos = triangle.position;
@@ -96,15 +101,24 @@ class Spike : GameObject
     
     public func enablePhycisc()
     {
+        let temp = triangle.position.x
+        //triangle.position = CGPoint.zero;
+        
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0.0, y: 50.0))
-        path.addLine(to: CGPoint(x: 50.0, y: -36.6))
-        path.addLine(to: CGPoint(x: -50.0, y: -36.6))
-        path.addLine(to: CGPoint(x: 0.0, y: 50.0))
+        path.addLine(to: CGPoint(x: 60.0, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: -50.0))
+        path.addLine(to: CGPoint(x: -60, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: 50))
         
-        physicsBody = SKPhysicsBody(polygonFrom: path.cgPath)
-        physicsBody?.affectedByGravity = false;
+        triangle.physicsBody = SKPhysicsBody(polygonFrom: path.cgPath)
+        triangle.physicsBody?.affectedByGravity = false;
         //physicsBody?.isDynamic = false;
-        physicsBody?.contactTestBitMask = GameScene.maskSpike;
+        //triangle.physicsBody?.contactTestBitMask = GameScene.maskSpike;
+        triangle.physicsBody?.categoryBitMask = GameScene.maskSpike;
+        triangle.physicsBody?.contactTestBitMask = GameScene.maskEverything;
+        triangle.physicsBody?.collisionBitMask = 0;
+        
+        //triangle.position.x = -340
     }
 }
