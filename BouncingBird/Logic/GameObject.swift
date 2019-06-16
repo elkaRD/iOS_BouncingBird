@@ -12,7 +12,6 @@ import GameplayKit
 class GameObject : SKTransformNode
 {
     internal var sprite : SKSpriteNode?;
-    internal var levelScene : SKScene?;
     
     init(_ scene : SKScene)
     {

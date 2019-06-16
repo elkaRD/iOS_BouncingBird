@@ -23,8 +23,6 @@ class Player : GameObject
     {
         super.init(scene);
         
-        self.levelScene = scene;
-        
         self.sprite = scene.childNode(withName: "//playerSprite") as? SKSpriteNode
         self.sprite?.move(toParent: self);
     }

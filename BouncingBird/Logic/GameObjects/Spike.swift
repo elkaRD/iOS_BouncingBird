@@ -23,7 +23,7 @@ class Spike : GameObject
     private static var didInitPoints : Bool = false;
     private static var path : UIBezierPath = UIBezierPath();
     
-    init(_ scene : SKScene,_ side : Bool, _ colorManager : LevelColorManager)
+    init(_ scene : SKScene, _ side : Bool, _ colorManager : LevelColorManager)
     {
         self.side = side;
         self.colorManager = colorManager;
@@ -35,21 +35,37 @@ class Spike : GameObject
         }
         
         zPosition = -100;
+        
+        createTriangle();
+        initTrianglePosition();
+    }
+    
+    required init(coder nsCoder: NSCoder)
+    {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func createTriangle()
+    {
         triangle = SKShapeNode(path: Spike.path.cgPath)
         triangle.fillColor = colorManager.getCurColor();
         addChild(triangle);
+    }
+    
+    private func initTrianglePosition()
+    {
+        var endPos = triangle.position;
         
         if side
         {
-            triangle.position.x = -scene.frame.size.width / 2 + 15;
+            endPos.x = -scene!.frame.size.width / 2 + 15;
         }
         else
         {
-            triangle.position.x = scene.frame.size.width / 2 - 15;
+            endPos.x = scene!.frame.size.width / 2 - 15;
         }
         
-        var startPos = triangle.position;
-        let endPos = triangle.position;
+        var startPos = endPos;
         
         if side
         {
@@ -62,11 +78,6 @@ class Spike : GameObject
         
         triangle.position = startPos;
         triangle.run(SKAction.move(to: endPos, duration: 0.5))
-    }
-    
-    required init(coder nsCoder: NSCoder)
-    {
-        fatalError("init(coder:) has not been implemented")
     }
     
     private static func initPoints()

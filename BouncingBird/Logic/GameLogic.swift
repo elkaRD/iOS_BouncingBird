@@ -37,17 +37,16 @@ class GameLogic
         player = Player(scene);
         gameObjects.append(player);
         
-        spikesSlots = Int(scene.size.height / Spike.length) - 1;
-        maxSpikes = spikesSlots - 1;
-        
         bestScore = GameLogic.loadBestScore();
         scene.setScore(curScore);
         
         colorManager = LevelColorManager(scene);
         
+        spikesSlots = Int(scene.size.height / Spike.length) - 1;
+        maxSpikes = spikesSlots - 1;
         generateSpikes();
     }
-    
+
     public func update(_ delta : CGFloat)
     {
         for go in gameObjects
@@ -55,6 +54,11 @@ class GameLogic
             go.update(delta);
         }
         
+        checkBounce();
+    }
+    
+    private func checkBounce()
+    {
         if player.position.x > scene.frame.size.width/2 - 80 && direction
         {
             onRightEdge();
@@ -103,6 +107,11 @@ class GameLogic
         if newBest
         {
             saveBestScore();
+        }
+        
+        if coin != nil
+        {
+            coin?.onCollected();
         }
         
         enableSpikes(&leftSpikes);

@@ -79,17 +79,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             let touchedNode = atPoint(location)
             if touchedNode.name == "playAgainButton"
             {
-                let gameSceneTemp = GameScene(fileNamed: "GameScene");
-                gameSceneTemp!.scaleMode = .aspectFill
-                self.scene?.view?.presentScene(gameSceneTemp!, transition: SKTransition.fade(withDuration: 1.0));
+                launchGame();
             }
             else if touchedNode.name == "returnButton"
             {
-                let gameSceneTemp = MainMenuScene(fileNamed: "MainMenuScene");
-                gameSceneTemp!.scaleMode = .aspectFill
-                self.scene?.view?.presentScene(gameSceneTemp!, transition: SKTransition.fade(withDuration: 1.0));
+                launchMainMenu();
             }
         }
+    }
+    
+    private func launchGame()
+    {
+        let gameSceneTemp = GameScene(fileNamed: "GameScene");
+        gameSceneTemp!.scaleMode = .aspectFill
+        self.scene?.view?.presentScene(gameSceneTemp!, transition: SKTransition.fade(withDuration: 1.0));
+    }
+    
+    private func launchMainMenu()
+    {
+        let gameSceneTemp = MainMenuScene(fileNamed: "MainMenuScene");
+        gameSceneTemp!.scaleMode = .aspectFill
+        self.scene?.view?.presentScene(gameSceneTemp!, transition: SKTransition.fade(withDuration: 1.0));
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
