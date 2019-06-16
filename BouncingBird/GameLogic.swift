@@ -17,6 +17,7 @@ class GameLogic
     private var leftSpikes = [Spike]();
     private var rightSpikes = [Spike]();
     private var gameObjects = [GameObject]();
+    private var coin : Coin? = nil;
     
     private let spikesSlots : Int
     private let minSpikes : Int = 2;
@@ -24,6 +25,8 @@ class GameLogic
     
     private var curScore : Int = 0;
     private var bestScore : Int = 0;
+    
+    private var direction : Bool = true;
     
     public init(_ scene : GameScene)
     {
@@ -47,6 +50,15 @@ class GameLogic
         {
             go.update(delta);
         }
+        
+        if player.position.x > 320 && direction
+        {
+            onRightEdge();
+        }
+        if player.position.x < -320 && !direction
+        {
+            onLeftEdge();
+        }
     }
     
     public func jump()
@@ -60,6 +72,7 @@ class GameLogic
         onBounce();
         generateSpikes(true, &leftSpikes);
         enableSpikes(&rightSpikes);
+        direction = true;
     }
     
     public func onRightEdge()
@@ -68,6 +81,7 @@ class GameLogic
         onBounce();
         generateSpikes(false, &rightSpikes);
         enableSpikes(&leftSpikes);
+        direction = false;
     }
     
     public func onDeath()
@@ -88,6 +102,11 @@ class GameLogic
         }
     }
     
+    public func collectedCoin()
+    {        
+        coin?.onCollected();
+    }
+    
     private func onBounce()
     {
         if !player.getIsAlive()
@@ -97,6 +116,11 @@ class GameLogic
         curScore = curScore + 1;
         
         scene.setScore(curScore);
+        
+        if coin == nil
+        {
+            coin = Coin(scene);
+        }
     }
     
     private func enableSpikes(_ spikesArray : inout [Spike])
@@ -139,7 +163,7 @@ class GameLogic
         
         for _ in 0...newSpikesCount
         {
-            newSlots.remove(at: randomInt(newSlots.count));
+            newSlots.remove(at: Int.random(newSlots.count));
         }
         
         for slotIndex in newSlots
@@ -152,22 +176,12 @@ class GameLogic
     
     private func randSpikesNumber() -> Int
     {
-        return randomInt(minSpikes, maxSpikes);
+        return Int.random(minSpikes, maxSpikes);
     }
     
     public func reachedHalfOfScreen()
     {
         
-    }
-    
-    private func randomInt(_ minVal : Int, _ maxVal : Int) -> Int
-    {
-        return Int(arc4random_uniform(UInt32(maxVal - minVal))) + minVal;
-    }
-    
-    private func randomInt(_ maxVal : Int) -> Int
-    {
-        return randomInt(0, maxVal);
     }
     
     public static func loadBestScore() -> Int

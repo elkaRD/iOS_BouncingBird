@@ -65,14 +65,14 @@ class Player : GameObject
             
             if direction
             {
-                yRotation = lerpSin(0, .pi, s);
+                yRotation = CGFloat.lerpSin(0, .pi, s);
             }
             else
             {
-                yRotation = lerpSin(.pi, 2 * .pi, s);
+                yRotation = CGFloat.lerpSin(.pi, 2 * .pi, s);
             }
             
-            print(lerp(0, .pi, s));
+            print(CGFloat.lerp(0, .pi, s));
         }
         
         if !isAlive
@@ -146,6 +146,9 @@ class Player : GameObject
         sprite?.physicsBody?.restitution = 0.8;
         sprite?.physicsBody?.linearDamping = 0.1;
         sprite?.physicsBody?.angularDamping = 0.1;
+        sprite?.physicsBody?.allowsRotation = true;
+        
+        sprite?.physicsBody?.applyAngularImpulse(1);
     }
     
     public func getIsAlive() -> Bool

@@ -26,6 +26,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     public static let maskRightEdge : UInt32 = 4;
     public static let maskLeftEdge : UInt32 = 8;
     public static let maskSpike : UInt32 = 16;
+    public static let maskCoin : UInt32 = 32;
     
     override func sceneDidLoad()
     {
@@ -46,7 +47,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         
         
         //Spike(self, true);
-        Coin(self);
+        //Coin(self);
     }
     
     override func didMove(to view: SKView) {
@@ -201,17 +202,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         
         if (bodyA.contactTestBitMask & GameScene.maskPlayer) != 0
         {
-            if (bodyB.contactTestBitMask & GameScene.maskLeftEdge) != 0
-            {
-                gameLogic?.onLeftEdge();
-            }
-            else if (bodyB.contactTestBitMask & GameScene.maskRightEdge) != 0
-            {
-                gameLogic?.onRightEdge();
-            }
-            else if (bodyB.contactTestBitMask & GameScene.maskSpike) != 0
+//            if (bodyB.contactTestBitMask & GameScene.maskLeftEdge) != 0
+//            {
+//                gameLogic?.onLeftEdge();
+//            }
+//            else if (bodyB.contactTestBitMask & GameScene.maskRightEdge) != 0
+//            {
+//                gameLogic?.onRightEdge();
+//            }
+            if (bodyB.contactTestBitMask & GameScene.maskSpike) != 0
             {
                 gameLogic?.onDeath();
+            }
+            else if (bodyB.contactTestBitMask & GameScene.maskCoin) != 0
+            {
+                gameLogic?.collectedCoin();
             }
         }
     }

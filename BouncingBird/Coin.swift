@@ -20,12 +20,12 @@ class Coin : GameObject
         self.sprite!.move(toParent: self);
         self.sprite?.position = CGPoint.zero;
         
-        let rotationAction = SKAction.customAction(withDuration: 0.5)
+        let rotationAction = SKAction.customAction(withDuration: 0.8)
         {
             node, elapsedTime in
             
-            let s: CGFloat = elapsedTime / CGFloat(0.5);
-            self.yRotation = self.lerpSin(0, .pi, s);
+            let s: CGFloat = elapsedTime / CGFloat(0.8);
+            self.yRotation = CGFloat.lerpSin(0, 2 * .pi, s);
         }
         
         run(SKAction.repeatForever( SKAction.sequence([SKAction.wait(forDuration: 3.0), rotationAction])));
@@ -34,5 +34,12 @@ class Coin : GameObject
     required init(coder nsCoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func onCollected()
+    {
+        let particles = SKEmitterNode(fileNamed: "ParticlesCollected.sks")
+        particles?.position = sprite!.position;
+        scene!.addChild(particles!)
     }
 }
