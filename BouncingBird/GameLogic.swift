@@ -37,8 +37,8 @@ class GameLogic
         player = Player(scene);
         gameObjects.append(player);
         
-        spikesSlots = Int(scene.size.height / Spike.length)
-        maxSpikes = spikesSlots - 2;
+        spikesSlots = Int(scene.size.height / Spike.length) - 1;
+        maxSpikes = spikesSlots - 1;
         
         bestScore = GameLogic.loadBestScore();
         scene.setScore(curScore);
@@ -170,7 +170,7 @@ class GameLogic
         
         spikesArray.removeAll();
         
-        let newSpikesCount = randSpikesNumber();
+        let newSpikesCount = spikesSlots - randSpikesNumber();
         var newSlots : [Int] = Array()
         for i in 0...spikesSlots
         {
@@ -185,7 +185,7 @@ class GameLogic
         for slotIndex in newSlots
         {
             let spike = Spike(scene, side, colorManager);
-            spike.position.y = Spike.length * CGFloat(slotIndex) - scene.frame.size.height / 2;
+            spike.position.y = Spike.length * CGFloat(slotIndex + 1) - scene.frame.size.height / 2;
             spikesArray.append(spike);
         }
     }

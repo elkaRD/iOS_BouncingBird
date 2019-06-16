@@ -163,7 +163,24 @@ class Player : GameObject
             return;
         }
         
-        rotYChanging = true;
+        //rotYChanging = true;
         rotYTime = 0;
+        
+        let rotationAction = SKAction.customAction(withDuration: TimeInterval(self.rotYDuration))
+        {
+            node, elapsedTime in
+            
+            let s: CGFloat = elapsedTime / CGFloat(self.rotYDuration);
+            if self.direction
+            {
+                self.yRotation = CGFloat.lerpSin(0, .pi, s);
+            }
+            else
+            {
+                self.yRotation = CGFloat.lerpSin(.pi, 2 * .pi, s);
+            }
+        }
+        
+        run(rotationAction);
     }
 }
