@@ -21,7 +21,7 @@ extension UIColor
         var r = c.redValue;
         var g = c.greenValue;
         var b = c.blueValue;
-        var a = c.alphaValue;
+        let a = c.alphaValue;
         
         r *= s;
         g *= s;
@@ -44,10 +44,10 @@ class LevelColorManager
     {
         levelScene = scene;
         
-        nodes.append((scene.childNode(withName: "//frameLeft") as? SKNode)!);
-        nodes.append((scene.childNode(withName: "//frameRight") as? SKNode)!);
-        nodes.append((scene.childNode(withName: "//frameTop") as? SKNode)!);
-        nodes.append((scene.childNode(withName: "//frameBottom") as? SKNode)!);
+        nodes.append((scene.childNode(withName: "//frameLeft"))!);
+        nodes.append((scene.childNode(withName: "//frameRight"))!);
+        nodes.append((scene.childNode(withName: "//frameTop"))!);
+        nodes.append((scene.childNode(withName: "//frameBottom"))!);
         
         colors.append(UIColor.red);
         colors.append(UIColor.green);
@@ -61,6 +61,16 @@ class LevelColorManager
         colors.append(UIColor.white);
     }
     
+    public func addNode(_ node : SKNode)
+    {
+        nodes.append(node);
+    }
+    
+//    public func removeNode(_ node : SKNode)
+//    {
+//        nodes.remove(node);
+//    }
+    
     public func changeColor(_ leftSpikes : inout [Spike], _ rightSpikes : inout [Spike])
     {
         index += 1;
@@ -69,11 +79,11 @@ class LevelColorManager
         
         for spike in leftSpikes
         {
-            spike.run(colorAction);
+            spike.runActionOnTriangle(colorAction);
         }
         for spike in rightSpikes
         {
-            spike.run(colorAction);
+            spike.runActionOnTriangle(colorAction);
         }
         for node in nodes
         {
@@ -82,5 +92,17 @@ class LevelColorManager
         
         let backgroundColor = UIColor.mul(colors[index], 0.3);
         levelScene.run(SKAction.colorize(with: backgroundColor, colorBlendFactor: 1, duration: 2));
+    }
+    
+    public func getCurColor() -> UIColor
+    {
+        return colors[index];
+    }
+    
+    public func getNextColor() -> UIColor
+    {
+        var i = index + 1;
+        i %= colors.count;
+        return colors[i];
     }
 }

@@ -170,7 +170,7 @@ class GameLogic
         
         spikesArray.removeAll();
         
-        var newSpikesCount = randSpikesNumber();
+        let newSpikesCount = randSpikesNumber();
         var newSlots : [Int] = Array()
         for i in 0...spikesSlots
         {
@@ -184,7 +184,7 @@ class GameLogic
         
         for slotIndex in newSlots
         {
-            var spike = Spike(scene, side);
+            let spike = Spike(scene, side, colorManager);
             spike.position.y = Spike.length * CGFloat(slotIndex) - scene.frame.size.height / 2;
             spikesArray.append(spike);
         }

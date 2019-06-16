@@ -16,7 +16,7 @@ class Coin : GameObject
         super.init(scene);
         
         let spriteToCopy = scene.childNode(withName: "//coinSprite") as? SKSpriteNode
-        self.sprite = spriteToCopy?.copy() as! SKSpriteNode;
+        self.sprite = spriteToCopy?.copy() as? SKSpriteNode;
         self.sprite!.move(toParent: self);
         self.sprite?.position = CGPoint.zero;
         
@@ -32,7 +32,10 @@ class Coin : GameObject
         setScale(0);
         run(SKAction.scale(to: tempScale, duration: 0.4));
         
-        run(SKAction.repeatForever( SKAction.sequence([SKAction.wait(forDuration: 3.0), rotationAction])));
+        run(SKAction.repeatForever( SKAction.sequence([rotationAction, SKAction.wait(forDuration: 3.0)])));
+        
+        position.x = CGFloat.random(-scene.frame.size.width / 2 + 100, scene.frame.size.width / 2 - 100);
+        position.y = CGFloat.random(-scene.frame.size.height / 2 + 100, scene.frame.size.height / 2 - 100);
     }
     
     required init(coder nsCoder: NSCoder)
@@ -43,7 +46,7 @@ class Coin : GameObject
     public func onCollected()
     {
         let particles = SKEmitterNode(fileNamed: "ParticlesCollected.sks")
-        particles?.position = sprite!.position;
+        particles?.position = position;
         scene!.addChild(particles!)
         
         //run(SKAction.move(to: endPos, duration: 0.5))

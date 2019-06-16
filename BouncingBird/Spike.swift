@@ -14,12 +14,14 @@ class Spike : GameObject
     public static let length : CGFloat = 200;
     
     private let side : Bool;
+    private let colorManager : LevelColorManager;
     
     private var triangle : SKShapeNode = SKShapeNode()
     
-    init(_ scene : SKScene,_ side : Bool)
+    init(_ scene : SKScene,_ side : Bool, _ colorManager : LevelColorManager)
     {
         self.side = side;
+        self.colorManager = colorManager;
         super.init(scene);
         
         let path = UIBezierPath()
@@ -39,8 +41,9 @@ class Spike : GameObject
 //        path.addLine(to: CGPoint(x: 40, y: 0))
 //        path.addLine(to: CGPoint(x: 0, y: 0))
         
+        zPosition = -100;
         triangle = SKShapeNode(path: path.cgPath)
-        triangle.fillColor = UIColor.red;
+        triangle.fillColor = colorManager.getCurColor();
         addChild(triangle);
         
 //        physicsBody = SKPhysicsBody(polygonFrom: path.cgPath)
@@ -60,7 +63,7 @@ class Spike : GameObject
         }
         
         var startPos = triangle.position;
-        var endPos = triangle.position;
+        let endPos = triangle.position;
         
         if side
         {
@@ -101,9 +104,6 @@ class Spike : GameObject
     
     public func enablePhycisc()
     {
-        let temp = triangle.position.x
-        //triangle.position = CGPoint.zero;
-        
         let path = UIBezierPath()
         path.move(to: CGPoint(x: 0.0, y: 50.0))
         path.addLine(to: CGPoint(x: 60.0, y: 0))
@@ -119,6 +119,11 @@ class Spike : GameObject
         triangle.physicsBody?.contactTestBitMask = GameScene.maskEverything;
         triangle.physicsBody?.collisionBitMask = 0;
         
-        //triangle.position.x = -340
+        triangle.run(SKAction.colorize(with: UIColor.green, colorBlendFactor: 1, duration: 2));
+    }
+    
+    public func runActionOnTriangle(_ action : SKAction)
+    {
+        triangle.run(action);
     }
 }

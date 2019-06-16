@@ -193,8 +193,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate
 //
 //        print ("didBegin: " + String(a.contactTestBitMask));
         
-        var bodyA = contact.bodyA;
-        var bodyB = contact.bodyB;
+        let bodyA = contact.bodyA;
+        let bodyB = contact.bodyB;
         
 //        if (bodyA.contactTestBitMask & GameScene.maskPlayer) == 0
 //        {
