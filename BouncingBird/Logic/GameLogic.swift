@@ -44,7 +44,7 @@ class GameLogic
         
         spikesSlots = Int(scene.size.height / Spike.length) - 1;
         maxSpikes = spikesSlots - 1;
-        generateSpikes();
+        generateSpikes(true, &leftSpikes);
     }
 
     public func update(_ delta : CGFloat)
@@ -154,12 +154,6 @@ class GameLogic
         {
             spike.enablePhycisc();
         }
-    }
-    
-    private func generateSpikes()
-    {
-        generateSpikes(true, &leftSpikes);
-        generateSpikes(false, &rightSpikes);
     }
 
     private func generateSpikes(_ side : Bool, _ spikesArray : inout [Spike])
