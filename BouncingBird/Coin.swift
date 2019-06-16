@@ -48,8 +48,7 @@ class Coin : GameObject
         let particles = SKEmitterNode(fileNamed: "ParticlesCollected.sks")
         particles?.position = position;
         scene!.addChild(particles!)
-        
-        //run(SKAction.move(to: endPos, duration: 0.5))
+
         run(SKAction.sequence([SKAction.scale(to: 0, duration: 0.4), SKAction.removeFromParent()]))
     }
 }

@@ -9,28 +9,6 @@
 import SpriteKit
 import GameplayKit
 
-extension UIColor
-{
-    var redValue: CGFloat{ return CIColor(color: self).red }
-    var greenValue: CGFloat{ return CIColor(color: self).green }
-    var blueValue: CGFloat{ return CIColor(color: self).blue }
-    var alphaValue: CGFloat{ return CIColor(color: self).alpha }
-    
-    public static func mul(_ c : UIColor,_ s : CGFloat) -> UIColor
-    {
-        var r = c.redValue;
-        var g = c.greenValue;
-        var b = c.blueValue;
-        let a = c.alphaValue;
-        
-        r *= s;
-        g *= s;
-        b *= s;
-        
-        return UIColor(red: r, green: g, blue: b, alpha: a);
-    }
-}
-
 class LevelColorManager
 {
     private var nodes : [SKNode] = [];
@@ -61,30 +39,12 @@ class LevelColorManager
         colors.append(UIColor.white);
     }
     
-    public func addNode(_ node : SKNode)
-    {
-        nodes.append(node);
-    }
-    
-//    public func removeNode(_ node : SKNode)
-//    {
-//        nodes.remove(node);
-//    }
-    
-    public func changeColor(_ leftSpikes : inout [Spike], _ rightSpikes : inout [Spike])
+    public func changeColor()
     {
         index += 1;
         index %= colors.count;
         let colorAction = SKAction.colorize(with: colors[index], colorBlendFactor: 1, duration: 2);
-        
-        for spike in leftSpikes
-        {
-            spike.runActionOnTriangle(colorAction);
-        }
-        for spike in rightSpikes
-        {
-            spike.runActionOnTriangle(colorAction);
-        }
+
         for node in nodes
         {
             node.run(colorAction);

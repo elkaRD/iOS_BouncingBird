@@ -18,48 +18,32 @@ class Spike : GameObject
     
     private var triangle : SKShapeNode = SKShapeNode()
     
+    private static var didInitPoints : Bool = false;
+    private static var path : UIBezierPath = UIBezierPath();
+    
     init(_ scene : SKScene,_ side : Bool, _ colorManager : LevelColorManager)
     {
         self.side = side;
         self.colorManager = colorManager;
         super.init(scene);
         
-        let path = UIBezierPath()
-//        path.move(to: CGPoint(x: 0.0, y: 50.0))
-//        path.addLine(to: CGPoint(x: 50.0, y: -36.6))
-//        path.addLine(to: CGPoint(x: -50.0, y: -36.6))
-//        path.addLine(to: CGPoint(x: 0.0, y: 50.0))
-        path.move(to: CGPoint(x: 0.0, y: 50.0))
-        path.addLine(to: CGPoint(x: 60.0, y: 0))
-        path.addLine(to: CGPoint(x: 0, y: -50.0))
-        path.addLine(to: CGPoint(x: -60, y: 0))
-        path.addLine(to: CGPoint(x: 0, y: 50))
-        
-//        let path = CGMutablePath()
-//        path.move(to: CGPoint(x: 0, y: 0))
-//        path.addLine(to: CGPoint(x: 20, y: 44))
-//        path.addLine(to: CGPoint(x: 40, y: 0))
-//        path.addLine(to: CGPoint(x: 0, y: 0))
+        if !Spike.didInitPoints
+        {
+            Spike.initPoints();
+        }
         
         zPosition = -100;
-        triangle = SKShapeNode(path: path.cgPath)
+        triangle = SKShapeNode(path: Spike.path.cgPath)
         triangle.fillColor = colorManager.getCurColor();
         addChild(triangle);
-        
-//        physicsBody = SKPhysicsBody(polygonFrom: path.cgPath)
-//        physicsBody?.affectedByGravity = false;
-//        //physicsBody?.isDynamic = false;        
-//        physicsBody?.contactTestBitMask = GameScene.maskSpike;
         
         if side
         {
             triangle.position.x = -scene.frame.size.width / 2 + 15;
-            //zRotation = -0.5;
         }
         else
         {
             triangle.position.x = scene.frame.size.width / 2 - 15;
-            //zRotation = 0.5;
         }
         
         var startPos = triangle.position;
@@ -76,13 +60,22 @@ class Spike : GameObject
         
         triangle.position = startPos;
         triangle.run(SKAction.move(to: endPos, duration: 0.5))
-        
-        //scene.addChild(self);
     }
     
     required init(coder nsCoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    private static func initPoints()
+    {
+        didInitPoints = true;
+        
+        path.move(to: CGPoint(x: 0.0, y: 50.0))
+        path.addLine(to: CGPoint(x: 60.0, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: -50.0))
+        path.addLine(to: CGPoint(x: -60, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: 50))
     }
     
     public func hide()
@@ -103,18 +96,9 @@ class Spike : GameObject
     }
     
     public func enablePhycisc()
-    {
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0.0, y: 50.0))
-        path.addLine(to: CGPoint(x: 60.0, y: 0))
-        path.addLine(to: CGPoint(x: 0, y: -50.0))
-        path.addLine(to: CGPoint(x: -60, y: 0))
-        path.addLine(to: CGPoint(x: 0, y: 50))
-        
-        triangle.physicsBody = SKPhysicsBody(polygonFrom: path.cgPath)
+    {        
+        triangle.physicsBody = SKPhysicsBody(polygonFrom: Spike.path.cgPath)
         triangle.physicsBody?.affectedByGravity = false;
-        //physicsBody?.isDynamic = false;
-        //triangle.physicsBody?.contactTestBitMask = GameScene.maskSpike;
         triangle.physicsBody?.categoryBitMask = GameScene.maskSpike;
         triangle.physicsBody?.contactTestBitMask = GameScene.maskEverything;
         triangle.physicsBody?.collisionBitMask = 0;

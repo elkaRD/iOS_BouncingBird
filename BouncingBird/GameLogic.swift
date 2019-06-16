@@ -130,7 +130,7 @@ class GameLogic
             coin = Coin(scene);
         }
         
-        colorManager.changeColor(&leftSpikes, &rightSpikes);
+        colorManager.changeColor();
     }
     
     private func incrementScore()
@@ -152,17 +152,9 @@ class GameLogic
         generateSpikes(true, &leftSpikes);
         generateSpikes(false, &rightSpikes);
     }
-    
-    //private func generateSpikes(_ side : Bool)
+
     private func generateSpikes(_ side : Bool, _ spikesArray : inout [Spike])
     {
-        //var spikesArray = leftSpikes
-        
-//        if !side
-//        {
-//            spikesArray = rightSpikes
-//        }
-        
         for spike in spikesArray
         {
             spike.hide()
