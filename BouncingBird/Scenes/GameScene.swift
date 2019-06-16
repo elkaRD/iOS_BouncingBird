@@ -25,6 +25,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
     public static let maskLeftEdge : UInt32 = 8;
     public static let maskSpike : UInt32 = 16;
     public static let maskCoin : UInt32 = 32;
+    public static let maskTopBottomEdge : UInt32 = 64;
     public static let maskEverything : UInt32 = 4294967295;
     
     override func sceneDidLoad()
@@ -170,7 +171,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         
         bestScoreLabel?.run(SKAction.sequence([delay, show]));
         
-        let playAgainLabel = ButtonNode(fontNamed:"Chalkduster")
+        let playAgainLabel = SKLabelNode(fontNamed:"Chalkduster")
         playAgainLabel.position.y = -340;
         playAgainLabel.zPosition = 100;
         playAgainLabel.name = "playAgainButton";
@@ -179,7 +180,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         CTFontManagerCopyAvailablePostScriptNames()
         addChild(playAgainLabel)
         
-        let returnLabel = ButtonNode(fontNamed:"Chalkduster")
+        let returnLabel = SKLabelNode(fontNamed:"Chalkduster")
         returnLabel.position.y = -490
         returnLabel.zPosition = 100;
         returnLabel.name = "returnButton";

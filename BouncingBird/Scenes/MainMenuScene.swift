@@ -15,7 +15,7 @@ class MainMenuScene: SKScene
     
     override func sceneDidLoad()
     {
-        let startGameLabel = ButtonNode(fontNamed:"Chalkduster")
+        let startGameLabel = SKLabelNode(fontNamed:"Chalkduster")
         startGameLabel.name = "startGameButton";
         startGameLabel.text = "PLAY";
         startGameLabel.fontSize = 144

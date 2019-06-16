@@ -55,11 +55,11 @@ class GameLogic
             go.update(delta);
         }
         
-        if player.position.x > 290 && direction
+        if player.position.x > scene.frame.size.width/2 - 80 && direction
         {
             onRightEdge();
         }
-        if player.position.x < -290 && !direction
+        if player.position.x < -scene.frame.size.width/2 + 80 && !direction
         {
             onLeftEdge();
         }

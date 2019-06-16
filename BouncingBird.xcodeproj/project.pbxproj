@@ -18,7 +18,6 @@
 		E1D1CDA622B26CBF00830CB0 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D1CDA522B26CBF00830CB0 /* GameObject.swift */; };
 		E1FF320A22B199D600D17F3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FF320922B199D600D17F3D /* AppDelegate.swift */; };
 		E1FF320C22B199D600D17F3D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E1FF320B22B199D600D17F3D /* GameScene.sks */; };
-		E1FF320E22B199D600D17F3D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = E1FF320D22B199D600D17F3D /* Actions.sks */; };
 		E1FF321022B199D600D17F3D /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FF320F22B199D600D17F3D /* GameScene.swift */; };
 		E1FF321222B199D600D17F3D /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FF321122B199D600D17F3D /* GameViewController.swift */; };
 		E1FF321522B199D600D17F3D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1FF321322B199D600D17F3D /* Main.storyboard */; };
@@ -26,7 +25,6 @@
 		E1FF321A22B199D700D17F3D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1FF321822B199D700D17F3D /* LaunchScreen.storyboard */; };
 		E1FF322222B19B3100D17F3D /* MainMenuScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = E1FF322122B19B3100D17F3D /* MainMenuScene.sks */; };
 		E1FF322422B19B6A00D17F3D /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FF322322B19B6A00D17F3D /* MainMenuScene.swift */; };
-		E1FF322622B1A56800D17F3D /* ButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FF322522B1A56800D17F3D /* ButtonNode.swift */; };
 		E1FF322822B2295400D17F3D /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FF322722B2295400D17F3D /* Player.swift */; };
 		E1FF322A22B22B2000D17F3D /* GameLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FF322922B22B2000D17F3D /* GameLogic.swift */; };
 /* End PBXBuildFile section */
@@ -44,7 +42,6 @@
 		E1FF320622B199D600D17F3D /* BouncingBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BouncingBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1FF320922B199D600D17F3D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1FF320B22B199D600D17F3D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
-		E1FF320D22B199D600D17F3D /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		E1FF320F22B199D600D17F3D /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
 		E1FF321122B199D600D17F3D /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		E1FF321422B199D600D17F3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -53,7 +50,6 @@
 		E1FF321B22B199D700D17F3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1FF322122B19B3100D17F3D /* MainMenuScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MainMenuScene.sks; sourceTree = "<group>"; };
 		E1FF322322B19B6A00D17F3D /* MainMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
-		E1FF322522B1A56800D17F3D /* ButtonNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonNode.swift; sourceTree = "<group>"; };
 		E1FF322722B2295400D17F3D /* Player.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 		E1FF322922B22B2000D17F3D /* GameLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameLogic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -69,6 +65,57 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E107A69C22B6F92E0062D7C0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E107A69222B663BB0062D7C0 /* Random.swift */,
+				E107A69422B665FA0062D7C0 /* Lerp.swift */,
+				E107A69A22B6F3870062D7C0 /* ColorBrightness.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		E107A69D22B6F9490062D7C0 /* GameObjects */ = {
+			isa = PBXGroup;
+			children = (
+				E1FF322722B2295400D17F3D /* Player.swift */,
+				E152B43022B2D6120033EEF6 /* Spike.swift */,
+				E107A69022B5DD5E0062D7C0 /* Coin.swift */,
+			);
+			path = GameObjects;
+			sourceTree = "<group>";
+		};
+		E107A69E22B6F9680062D7C0 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				E107A68E22B43D060062D7C0 /* ParticlesDrops.sks */,
+				E107A69622B667DA0062D7C0 /* ParticlesCollected.sks */,
+			);
+			path = Particles;
+			sourceTree = "<group>";
+		};
+		E107A69F22B6F97E0062D7C0 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				E1FF322122B19B3100D17F3D /* MainMenuScene.sks */,
+				E1FF322322B19B6A00D17F3D /* MainMenuScene.swift */,
+				E1FF320B22B199D600D17F3D /* GameScene.sks */,
+				E1FF320F22B199D600D17F3D /* GameScene.swift */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		E107A6A022B6F99D0062D7C0 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				E107A69D22B6F9490062D7C0 /* GameObjects */,
+				E1FF322922B22B2000D17F3D /* GameLogic.swift */,
+				E1D1CDA522B26CBF00830CB0 /* GameObject.swift */,
+				E107A69822B69C620062D7C0 /* LevelColorManager.swift */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
 		E1FF31FD22B199D500D17F3D = {
 			isa = PBXGroup;
 			children = (
@@ -88,29 +135,16 @@
 		E1FF320822B199D600D17F3D /* BouncingBird */ = {
 			isa = PBXGroup;
 			children = (
-				E1FF322922B22B2000D17F3D /* GameLogic.swift */,
-				E1FF322122B19B3100D17F3D /* MainMenuScene.sks */,
-				E1FF322322B19B6A00D17F3D /* MainMenuScene.swift */,
+				E107A6A022B6F99D0062D7C0 /* Logic */,
+				E107A69F22B6F97E0062D7C0 /* Scenes */,
+				E107A69E22B6F9680062D7C0 /* Particles */,
+				E107A69C22B6F92E0062D7C0 /* Extensions */,
 				E1FF320922B199D600D17F3D /* AppDelegate.swift */,
-				E1FF320B22B199D600D17F3D /* GameScene.sks */,
-				E1FF320D22B199D600D17F3D /* Actions.sks */,
-				E1FF320F22B199D600D17F3D /* GameScene.swift */,
-				E1FF322722B2295400D17F3D /* Player.swift */,
 				E1FF321122B199D600D17F3D /* GameViewController.swift */,
 				E1FF321322B199D600D17F3D /* Main.storyboard */,
 				E1FF321622B199D700D17F3D /* Assets.xcassets */,
 				E1FF321822B199D700D17F3D /* LaunchScreen.storyboard */,
 				E1FF321B22B199D700D17F3D /* Info.plist */,
-				E1FF322522B1A56800D17F3D /* ButtonNode.swift */,
-				E1D1CDA522B26CBF00830CB0 /* GameObject.swift */,
-				E152B43022B2D6120033EEF6 /* Spike.swift */,
-				E107A68E22B43D060062D7C0 /* ParticlesDrops.sks */,
-				E107A69022B5DD5E0062D7C0 /* Coin.swift */,
-				E107A69222B663BB0062D7C0 /* Random.swift */,
-				E107A69422B665FA0062D7C0 /* Lerp.swift */,
-				E107A69622B667DA0062D7C0 /* ParticlesCollected.sks */,
-				E107A69822B69C620062D7C0 /* LevelColorManager.swift */,
-				E107A69A22B6F3870062D7C0 /* ColorBrightness.swift */,
 			);
 			path = BouncingBird;
 			sourceTree = "<group>";
@@ -180,7 +214,6 @@
 				E107A68F22B43D060062D7C0 /* ParticlesDrops.sks in Resources */,
 				E1FF321722B199D700D17F3D /* Assets.xcassets in Resources */,
 				E1FF321A22B199D700D17F3D /* LaunchScreen.storyboard in Resources */,
-				E1FF320E22B199D600D17F3D /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,7 +224,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1FF322622B1A56800D17F3D /* ButtonNode.swift in Sources */,
 				E152B43122B2D6120033EEF6 /* Spike.swift in Sources */,
 				E1FF321022B199D600D17F3D /* GameScene.swift in Sources */,
 				E1FF321222B199D600D17F3D /* GameViewController.swift in Sources */,

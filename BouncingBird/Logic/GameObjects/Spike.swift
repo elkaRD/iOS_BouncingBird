@@ -12,6 +12,8 @@ import GameplayKit
 class Spike : GameObject
 {
     public static let length : CGFloat = 200;
+    public static let realSizeX : CGFloat = 60;
+    public static let realSizeY : CGFloat = 100;
     
     private let side : Bool;
     private let colorManager : LevelColorManager;
@@ -71,11 +73,11 @@ class Spike : GameObject
     {
         didInitPoints = true;
         
-        path.move(to: CGPoint(x: 0.0, y: 50.0))
-        path.addLine(to: CGPoint(x: 60.0, y: 0))
-        path.addLine(to: CGPoint(x: 0, y: -50.0))
-        path.addLine(to: CGPoint(x: -60, y: 0))
-        path.addLine(to: CGPoint(x: 0, y: 50))
+        path.move(to: CGPoint(x: 0.0, y: realSizeY/2))
+        path.addLine(to: CGPoint(x: realSizeX, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: -realSizeY/2))
+        path.addLine(to: CGPoint(x: -realSizeX, y: 0))
+        path.addLine(to: CGPoint(x: 0, y: realSizeY/2))
     }
     
     public func hide()
