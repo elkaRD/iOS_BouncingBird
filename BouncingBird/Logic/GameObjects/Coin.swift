@@ -61,7 +61,7 @@ class Coin : GameObject
     
     private func initPosition()
     {
-        position.x = CGFloat.random(-scene!.frame.size.width / 2 + 100, scene!.frame.size.width / 2 - 100);
+        position.x = CGFloat.random(-scene!.frame.size.width / 2 + 150, scene!.frame.size.width / 2 - 150);
         position.y = CGFloat.random(-scene!.frame.size.height / 2 + 100, scene!.frame.size.height / 2 - 100);
     }
 }

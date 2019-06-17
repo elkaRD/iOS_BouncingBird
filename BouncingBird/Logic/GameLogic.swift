@@ -30,6 +30,9 @@ class GameLogic
     
     private let colorManager : LevelColorManager;
     
+    private var triggerLeftEdge : Bool = false;
+    private var triggerRightEdge : Bool = false;
+    
     public init(_ scene : GameScene)
     {
         self.scene = scene;
@@ -57,15 +60,33 @@ class GameLogic
         checkBounce();
     }
     
-    private func checkBounce()
+    public func onCollisionLeft()
     {
-        if player.position.x > scene.frame.size.width/2 - 80 && direction
+        if !direction
         {
-            onRightEdge();
+            triggerLeftEdge = true;
         }
-        if player.position.x < -scene.frame.size.width/2 + 80 && !direction
+    }
+    
+    public func onCollisionRight()
+    {
+        if direction
         {
+            triggerRightEdge = true;
+        }
+    }
+    
+    private func checkBounce()
+    {        
+        if (triggerLeftEdge)
+        {
+            triggerLeftEdge = false;
             onLeftEdge();
+        }
+        if (triggerRightEdge)
+        {
+            triggerRightEdge = false;
+            onRightEdge();
         }
     }
     

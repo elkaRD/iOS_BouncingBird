@@ -12,8 +12,8 @@ import GameplayKit
 class Spike : GameObject
 {
     public static let length : CGFloat = 200;
-    public static let realSizeX : CGFloat = 60;
-    public static let realSizeY : CGFloat = 100;
+    public static let realSizeX : CGFloat = 70;
+    public static let realSizeY : CGFloat = 120;
     
     private let side : Bool;
     private let colorManager : LevelColorManager;
@@ -58,11 +58,11 @@ class Spike : GameObject
         
         if side
         {
-            endPos.x = -scene!.frame.size.width / 2 + 15;
+            endPos.x = -scene!.frame.size.width / 2 + 50;
         }
         else
         {
-            endPos.x = scene!.frame.size.width / 2 - 15;
+            endPos.x = scene!.frame.size.width / 2 - 50;
         }
         
         var startPos = endPos;

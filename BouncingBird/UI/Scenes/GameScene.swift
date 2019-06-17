@@ -143,7 +143,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         
         if (bodyA.contactTestBitMask & GameScene.maskPlayer) != 0
         {
-            if (bodyB.categoryBitMask & GameScene.maskSpike) != 0
+            if (bodyB.categoryBitMask & GameScene.maskLeftEdge) != 0
+            {
+                gameLogic?.onCollisionLeft();
+            }
+            else if (bodyB.categoryBitMask & GameScene.maskRightEdge) != 0
+            {
+                gameLogic?.onCollisionRight()
+            }
+            else if (bodyB.categoryBitMask & GameScene.maskSpike) != 0
             {
                 gameLogic?.onDeath();
             }
@@ -170,6 +178,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         if isNewBest
         {
             bestScoreLabel?.text = "NEW HI-SCORE!";
+            let particles = SKEmitterNode(fileNamed: "ParticlesHighScore.sks");
+            particles?.position.x = 20;
+            particles?.position.y = -123;
+            addChild(particles!);
         }
         else
         {
@@ -181,6 +193,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         
         bestScoreLabel?.run(SKAction.sequence([delay, show]));
         
+        drawRestartButton();
+        drawReturnButton();
+    }
+    
+    private func drawRestartButton()
+    {
         let playAgainLabel = SKLabelNode(fontNamed:"Chalkduster")
         playAgainLabel.position.y = -340;
         playAgainLabel.zPosition = 100;
@@ -189,7 +207,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate
         playAgainLabel.fontSize = 120
         CTFontManagerCopyAvailablePostScriptNames()
         addChild(playAgainLabel)
-        
+    }
+    
+    private func drawReturnButton()
+    {
         let returnLabel = SKLabelNode(fontNamed:"Chalkduster")
         returnLabel.position.y = -490
         returnLabel.zPosition = 100;
