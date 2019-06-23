@@ -137,8 +137,10 @@ class GameLogic
     }
     
     public func collectedCoin()
-    {        
-        coin?.onCollected();
+    {
+        SoundManager.playSound(coin!, SoundManager.SoundType.Coin);
+        
+        coin!.onCollected();
         coin = nil;
         incrementScore();
     }

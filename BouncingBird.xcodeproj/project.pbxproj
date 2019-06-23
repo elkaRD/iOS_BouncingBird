@@ -15,6 +15,11 @@
 		E107A69922B69C620062D7C0 /* LevelColorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E107A69822B69C620062D7C0 /* LevelColorManager.swift */; };
 		E107A69B22B6F3870062D7C0 /* ColorBrightness.swift in Sources */ = {isa = PBXBuildFile; fileRef = E107A69A22B6F3870062D7C0 /* ColorBrightness.swift */; };
 		E107A6A422B716160062D7C0 /* ParticlesHighScore.sks in Resources */ = {isa = PBXBuildFile; fileRef = E107A6A222B716160062D7C0 /* ParticlesHighScore.sks */; };
+		E149226722C0350900407171 /* swing.flac in Resources */ = {isa = PBXBuildFile; fileRef = E149226522C0350900407171 /* swing.flac */; };
+		E149226822C0350900407171 /* crash.wav in Resources */ = {isa = PBXBuildFile; fileRef = E149226622C0350900407171 /* crash.wav */; };
+		E149227022C036AC00407171 /* click.wav in Resources */ = {isa = PBXBuildFile; fileRef = E149226E22C036AC00407171 /* click.wav */; };
+		E149227122C036AC00407171 /* coin.wav in Resources */ = {isa = PBXBuildFile; fileRef = E149226F22C036AC00407171 /* coin.wav */; };
+		E149227322C0374900407171 /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E149227222C0374900407171 /* SoundManager.swift */; };
 		E152B43122B2D6120033EEF6 /* Spike.swift in Sources */ = {isa = PBXBuildFile; fileRef = E152B43022B2D6120033EEF6 /* Spike.swift */; };
 		E1D1CDA622B26CBF00830CB0 /* GameObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1D1CDA522B26CBF00830CB0 /* GameObject.swift */; };
 		E1FF320A22B199D600D17F3D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1FF320922B199D600D17F3D /* AppDelegate.swift */; };
@@ -39,6 +44,11 @@
 		E107A69822B69C620062D7C0 /* LevelColorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelColorManager.swift; sourceTree = "<group>"; };
 		E107A69A22B6F3870062D7C0 /* ColorBrightness.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorBrightness.swift; sourceTree = "<group>"; };
 		E107A6A222B716160062D7C0 /* ParticlesHighScore.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = ParticlesHighScore.sks; sourceTree = "<group>"; };
+		E149226522C0350900407171 /* swing.flac */ = {isa = PBXFileReference; lastKnownFileType = file; path = swing.flac; sourceTree = "<group>"; };
+		E149226622C0350900407171 /* crash.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = crash.wav; sourceTree = "<group>"; };
+		E149226E22C036AC00407171 /* click.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = click.wav; sourceTree = "<group>"; };
+		E149226F22C036AC00407171 /* coin.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = coin.wav; sourceTree = "<group>"; };
+		E149227222C0374900407171 /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		E152B43022B2D6120033EEF6 /* Spike.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spike.swift; sourceTree = "<group>"; };
 		E1D1CDA522B26CBF00830CB0 /* GameObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameObject.swift; sourceTree = "<group>"; };
 		E1FF320622B199D600D17F3D /* BouncingBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BouncingBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,8 +134,20 @@
 			children = (
 				E107A69E22B6F9680062D7C0 /* Particles */,
 				E107A69F22B6F97E0062D7C0 /* Scenes */,
+				E149227222C0374900407171 /* SoundManager.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		E149226922C0353800407171 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				E149226E22C036AC00407171 /* click.wav */,
+				E149226F22C036AC00407171 /* coin.wav */,
+				E149226622C0350900407171 /* crash.wav */,
+				E149226522C0350900407171 /* swing.flac */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 		E1FF31FD22B199D500D17F3D = {
@@ -147,6 +169,7 @@
 		E1FF320822B199D600D17F3D /* BouncingBird */ = {
 			isa = PBXGroup;
 			children = (
+				E149226922C0353800407171 /* Sounds */,
 				E107A6A122B70E670062D7C0 /* UI */,
 				E107A6A022B6F99D0062D7C0 /* Logic */,
 				E107A69C22B6F92E0062D7C0 /* Extensions */,
@@ -223,8 +246,12 @@
 				E1FF322222B19B3100D17F3D /* MainMenuScene.sks in Resources */,
 				E1FF320C22B199D600D17F3D /* GameScene.sks in Resources */,
 				E107A69722B667DA0062D7C0 /* ParticlesCollected.sks in Resources */,
+				E149227022C036AC00407171 /* click.wav in Resources */,
+				E149226722C0350900407171 /* swing.flac in Resources */,
 				E107A68F22B43D060062D7C0 /* ParticlesDrops.sks in Resources */,
 				E1FF321722B199D700D17F3D /* Assets.xcassets in Resources */,
+				E149227122C036AC00407171 /* coin.wav in Resources */,
+				E149226822C0350900407171 /* crash.wav in Resources */,
 				E1FF321A22B199D700D17F3D /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -241,6 +268,7 @@
 				E1FF321222B199D600D17F3D /* GameViewController.swift in Sources */,
 				E1FF320A22B199D600D17F3D /* AppDelegate.swift in Sources */,
 				E1D1CDA622B26CBF00830CB0 /* GameObject.swift in Sources */,
+				E149227322C0374900407171 /* SoundManager.swift in Sources */,
 				E107A69B22B6F3870062D7C0 /* ColorBrightness.swift in Sources */,
 				E1FF322822B2295400D17F3D /* Player.swift in Sources */,
 				E1FF322422B19B6A00D17F3D /* MainMenuScene.swift in Sources */,

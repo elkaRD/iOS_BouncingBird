@@ -68,18 +68,20 @@ class Player : GameObject
                 SKAction.wait(forDuration: 1.0),
                 SKAction.removeFromParent()
                 ]))
+        
+        SoundManager.playSound(self, SoundManager.SoundType.Swing);
     }
     
     public func onLeftEdge()
     {
         direction = true;
-        rotateAfterBounce();
+        onBounce();
     }
     
     public func onRightEdge()
     {
         direction = false;
-        rotateAfterBounce();
+        onBounce();
     }
     
     public func onDeath()
@@ -91,6 +93,8 @@ class Player : GameObject
         sprite?.physicsBody?.angularDamping = 0.1;
         sprite?.physicsBody?.allowsRotation = true;
         sprite?.physicsBody?.applyAngularImpulse(1);
+        
+        SoundManager.playSound(self, SoundManager.SoundType.Crash);
     }
     
     public func getIsAlive() -> Bool
@@ -98,13 +102,19 @@ class Player : GameObject
         return isAlive;
     }
     
-    private func rotateAfterBounce()
+    private func onBounce()
     {
         if !isAlive
         {
             return;
         }
         
+        rotateAfterBounce();
+        SoundManager.playSound(self, SoundManager.SoundType.Click);
+    }
+    
+    private func rotateAfterBounce()
+    {
         let rotationAction = SKAction.customAction(withDuration: TimeInterval(self.rotYDuration))
         {
             node, elapsedTime in

@@ -80,10 +80,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate
             if touchedNode.name == "playAgainButton"
             {
                 launchGame();
+                SoundManager.playSound(self, SoundManager.SoundType.Click);
             }
             else if touchedNode.name == "returnButton"
             {
                 launchMainMenu();
+                SoundManager.playSound(self, SoundManager.SoundType.Click);
             }
         }
     }

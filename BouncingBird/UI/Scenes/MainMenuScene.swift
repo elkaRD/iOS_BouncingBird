@@ -57,6 +57,8 @@ class MainMenuScene: SKScene
                 let gameSceneTemp = GameScene(fileNamed: "GameScene");
                 gameSceneTemp!.scaleMode = .aspectFill
                 self.scene?.view?.presentScene(gameSceneTemp!, transition: SKTransition.fade(withDuration: 1.0));
+                
+                SoundManager.playSound(self, SoundManager.SoundType.Click);
             }
         }
     }
