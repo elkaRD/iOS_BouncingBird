@@ -101,6 +101,8 @@ class Player : GameObject
         sprite?.physicsBody?.applyAngularImpulse(1);
         
         SoundManager.playSound(self, SoundManager.SoundType.Crash);
+        
+        sprite?.run(SKAction.colorize(with: UIColor.black, colorBlendFactor: 0.5, duration: 1));
     }
     
     public func getIsAlive() -> Bool
